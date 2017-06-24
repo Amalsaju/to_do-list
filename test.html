@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap-toggle/css/bootstrap2-toggle.min.css">
+<link rel="stylesheet" href="bootstrap-toggle/css/bootstrap-toggle.min.css">
+
+<title>To-Do List</title>
+<script src="bootstrap-toggle/js/bootstrap2-toggle.min.js"></script>
+<script src="bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function(){
+
+    $("#addButton").click(function(){
+      var $input = $("#inputItem").val();
+          if($input==='') {
+            alert("Have to write something!!!")
+           }else{
+            $("#list").append("<li class='list-group-item'><span class='glyphicon glyphicon-ok' aria-hidden='true' style='visibility: hidden;'></span><input class='checkbox' type='checkbox' id='check'> "+$input+"<button class='delete btn btn-danger btn-sm'>x</button></li>");
+            $("#inputItem").val("");
+            $("#inputItem").focus();
+      }
+    });
+    $('li').click(function(){
+      $('span').css("visibility","visible");
+    });
+
+    $("#list").on('click','.delete',function(){
+       $(this).parent().remove();
+    });
+
+    $("#list").on('click','li',function () {
+      var $checkbox = $(this).find(':checkbox');
+      $checkbox.prop('checked', !$checkbox.prop('checked'));
+      if ($('.checkbox').is(":checked")){
+        $(this).css("opacity","0.5");
+      }else{
+        $(this).css("opacity","");
+      }
+    });
+  });
+</script>
+<style type="text/css">
+body{
+  font-size: 25px;
+  color: #384452 !important;
+  
+}
+  button{
+    color: #fff;
+    background-color: #384452;
+    border-color: #384452;
+    display: inline;
+    float: right;
+  }
+  li{
+    list-style-type: none;
+    background-color: #fff !important;
+    text-decoration: none;
+  }
+  li:hover{
+    opacity: 0.6;
+  }
+
+  h1{
+    background-color: #fff !important; 
+    margin-bottom: 30px !important;
+  }
+  .row{
+    margin-top: 10px;
+  }
+  #check{
+    visibility: hidden;
+    display: inline; 
+  }
+</style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <h1 class="jumbotron" align="center">To-Do List</h1>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="input-group input-group-lg">
+          <input id="inputItem" type="text" class="form-control" placeholder="Enter Here..." name="search" autofocus>
+          <div class="input-group-btn">
+            <button id="addButton" class="btn">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="list" class="col-md-8 col-md-offset-2" style="display: block;">
+         <li class="list-group-item">
+          <span class='glyphicon glyphicon-ok' aria-hidden='true' style="visibility: hidden;"></span>
+            <input class="checkbox" type="checkbox" id="check">Buy Milk<button class="delete btn btn-danger btn-sm">x</button>
+          </li>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
